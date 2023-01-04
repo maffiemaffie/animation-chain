@@ -60,200 +60,205 @@ namespace AnimChainLib
     //    }
     //}
 
-    public struct ColorPoint
-    {
-        private DoublePoint point;
-        public DoublePoint Point 
-        { 
-            get { return point; } 
-            set { point = value; } 
-        }
-        public double X 
-        { 
-            get { return point.X; } 
-            set { point.X = value; }
-        }
-        public double Y 
-        { 
-            get { return point.Y; }
-            set { point.Y = value; }
-        }
-        public SKColor Color;
+    //public struct ColorPoint
+    //{
+    //    private Point point;
+    //    public Point Point 
+    //    { 
+    //        get { return point; } 
+    //        set { point = value; } 
+    //    }
+    //    public double X 
+    //    { 
+    //        get { return point.X; } 
+    //        set { point.X = value; }
+    //    }
+    //    public double Y 
+    //    { 
+    //        get { return point.Y; }
+    //        set { point.Y = value; }
+    //    }
+    //    public SKColor Color;
 
-        public byte A { 
-            get { return Color.Alpha; }
-            set { Color = new SKColor(value, R, G, B); }
-        }
-        public byte R
-        {
-            get { return Color.Red; }
-            set { Color = new SKColor(A, value, G, B); }
-        }
-        public byte G
-        {
-            get { return Color.Green; }
-            set { Color = new SKColor(A, R, value, B); }
-        }
-        public byte B
-        {
-            get { return Color.Blue; }
-            set { Color = new SKColor(A, R, G, value); }
-        }
-        public byte Alpha
-        {
-            get { return A; }
-            set { A = value; }
-        }
-        public byte Red
-        {
-            get { return R; }
-            set { R = value; }
-        }
-        public byte Green
-        {
-            get { return G; }
-            set { G = value; }
-        }
-        public byte Blue
-        {
-            get { return B; }
-            set { B = value; }
-        }
+    //    public byte A { 
+    //        get { return Color.Alpha; }
+    //        set { Color = new SKColor(value, R, G, B); }
+    //    }
+    //    public byte R
+    //    {
+    //        get { return Color.Red; }
+    //        set { Color = new SKColor(A, value, G, B); }
+    //    }
+    //    public byte G
+    //    {
+    //        get { return Color.Green; }
+    //        set { Color = new SKColor(A, R, value, B); }
+    //    }
+    //    public byte B
+    //    {
+    //        get { return Color.Blue; }
+    //        set { Color = new SKColor(A, R, G, value); }
+    //    }
+    //    public byte Alpha
+    //    {
+    //        get { return A; }
+    //        set { A = value; }
+    //    }
+    //    public byte Red
+    //    {
+    //        get { return R; }
+    //        set { R = value; }
+    //    }
+    //    public byte Green
+    //    {
+    //        get { return G; }
+    //        set { G = value; }
+    //    }
+    //    public byte Blue
+    //    {
+    //        get { return B; }
+    //        set { B = value; }
+    //    }
 
-        public ColorPoint(DoublePoint point, SKColor color)
-        {
-            this.point = point;
-            this.Color = color;
-        }
-        public ColorPoint(ColorPoint point) : this(point.point, point.Color) { }
-        public ColorPoint(DoublePoint point, (byte r, byte g, byte b) color) : this(point, new SKColor(color.r, color.g, color.b)) { }
-        public ColorPoint(DoublePoint point, (byte a, byte r, byte g, byte b) color) : this(point, new SKColor(color.a, color.r, color.g, color.b)) { }
+    //    public ColorPoint(Point point, SKColor color)
+    //    {
+    //        this.point = point;
+    //        this.Color = color;
+    //    }
+    //    public ColorPoint(ColorPoint point) : this(point.point, point.Color) { }
+    //    public ColorPoint(Point point, (byte r, byte g, byte b) color) : this(point, new SKColor(color.r, color.g, color.b)) { }
+    //    public ColorPoint(Point point, (byte a, byte r, byte g, byte b) color) : this(point, new SKColor(color.a, color.r, color.g, color.b)) { }
 
-        public static ColorPoint operator +(ColorPoint p1, DoublePoint p2)
-        {
-            return new ColorPoint(p1.Point + p2, p1.Color);
-        }
-        public static ColorPoint operator +(ColorPoint p1, (double x, double y) p2) {
-            return new ColorPoint(p1.Point + p2, p1.Color);
-        }
-        public static ColorPoint operator -(ColorPoint p1, DoublePoint p2)
-        {
-            return new ColorPoint(p1.Point - p2, p1.Color);
-        }
-        public static ColorPoint operator -(ColorPoint p1, (double x, double y) p2)
-        {
-            return new ColorPoint(p1.Point - p2, p1.Color);
-        }
-        public static ColorPoint operator *(ColorPoint p1, DoublePoint p2)
-        {
-            return new ColorPoint(p1.point * p2, p1.Color);
-        }
-        public static ColorPoint operator *(ColorPoint p1, double scale)
-        {
-            return new ColorPoint(p1.point * scale, p1.Color);
-        }
-        public static ColorPoint operator /(ColorPoint p1, DoublePoint p2)
-        {
-            return new ColorPoint(p1.point / p2, p1.Color);
-        }
-        public static ColorPoint operator /(ColorPoint p1, double scale)
-        {
-            return new ColorPoint(p1.point / scale, p1.Color);
-        }
-    }
+    //    public static ColorPoint operator +(ColorPoint p1, Point p2)
+    //    {
+    //        return new ColorPoint(p1.Point + p2, p1.Color);
+    //    }
+    //    public static ColorPoint operator +(ColorPoint p1, (double x, double y) p2) {
+    //        return new ColorPoint(p1.Point + p2, p1.Color);
+    //    }
+    //    public static ColorPoint operator -(ColorPoint p1, Point p2)
+    //    {
+    //        return new ColorPoint(p1.Point - p2, p1.Color);
+    //    }
+    //    public static ColorPoint operator -(ColorPoint p1, (double x, double y) p2)
+    //    {
+    //        return new ColorPoint(p1.Point - p2, p1.Color);
+    //    }
+    //    public static ColorPoint operator *(ColorPoint p1, Point p2)
+    //    {
+    //        return new ColorPoint(p1.point * p2, p1.Color);
+    //    }
+    //    public static ColorPoint operator *(ColorPoint p1, double scale)
+    //    {
+    //        return new ColorPoint(p1.point * scale, p1.Color);
+    //    }
+    //    public static ColorPoint operator /(ColorPoint p1, Point p2)
+    //    {
+    //        return new ColorPoint(p1.point / p2, p1.Color);
+    //    }
+    //    public static ColorPoint operator /(ColorPoint p1, double scale)
+    //    {
+    //        return new ColorPoint(p1.point / scale, p1.Color);
+    //    }
+    //}
 
-    public struct DoublePoint
+    public struct Point
     {
         public double X;
         public double Y;
 
-        public static implicit operator DoublePoint((double x, double y) point) => new DoublePoint(point);
-        public static implicit operator (double, double)(DoublePoint point) => (point.X, point.Y);
-        public DoublePoint(double x, double y)
+        public static implicit operator Point((double x, double y) point) => new Point(point);
+        public static implicit operator (double, double)(Point point) => (point.X, point.Y);
+        public Point(double x, double y)
         {
-            this.X = x; 
-            this.Y = y;
+            X = x;
+            Y = y;
         }
-        public DoublePoint((double x, double y) point) : this(point.x, point.y) { }
+        public Point((double x, double y) point) : this(point.x, point.y) { }
 
-        public static DoublePoint operator +(DoublePoint p1, DoublePoint p2)
+        public static Point operator +(Point p1, Point p2)
         {
-            return new DoublePoint(p1.X + p2.X, p1.Y + p2.Y);
+            return new Point(p1.X + p2.X, p1.Y + p2.Y);
         }
-        public static DoublePoint operator +(DoublePoint p1, (double X, double Y) p2)
+        public static Point operator +(Point p1, (double X, double Y) p2)
         {
-            return new DoublePoint(p1.X + p2.X, p1.Y + p2.Y);
+            return new Point(p1.X + p2.X, p1.Y + p2.Y);
         }
-        public static DoublePoint operator -(DoublePoint p1, DoublePoint p2)
+        public static Point operator -(Point p1, Point p2)
         {
-            return new DoublePoint(p1.X - p2.X, p1.Y - p2.Y);
+            return new Point(p1.X - p2.X, p1.Y - p2.Y);
         }
-        public static DoublePoint operator -(DoublePoint p1, (double X, double Y) p2)
+        public static Point operator -(Point p1, (double X, double Y) p2)
         {
-            return new DoublePoint(p1.X - p2.X, p1.Y - p2.Y);
+            return new Point(p1.X - p2.X, p1.Y - p2.Y);
         }
-        public static DoublePoint operator *(DoublePoint p1, DoublePoint p2)
+        public static Point operator *(Point p1, Point p2)
         {
-            return new DoublePoint(p1.X * p2.X, p1.Y * p2.Y);
+            return new Point(p1.X * p2.X, p1.Y * p2.Y);
         }
-        public static DoublePoint operator *(DoublePoint p1, double scale)
+        public static Point operator *(Point p1, double scale)
         {
-            return new DoublePoint(p1.X * scale, p1.Y * scale);
+            return new Point(p1.X * scale, p1.Y * scale);
         }
-        public static DoublePoint operator /(DoublePoint p1, DoublePoint p2)
+        public static Point operator /(Point p1, Point p2)
         {
-            return new DoublePoint(p1.X / p2.X, p1.Y / p2.Y);
+            return new Point(p1.X / p2.X, p1.Y / p2.Y);
         }
-        public static DoublePoint operator /(DoublePoint p1, double scale)
+        public static Point operator /(Point p1, double scale)
         {
-            return new DoublePoint(p1.X / scale, p1.Y / scale);
+            return new Point(p1.X / scale, p1.Y / scale);
         }
     }
 
     public class PointCollection : IEnumerable, ICollection
     {
-        private ColorPoint[] data;
-        public ColorPoint[] Data
+        private Point[,] data;
+        public Point[,] Data
         {
             get { return data; }
         }
-        public ColorPoint this[int i]
+        public Point this[int i]
         {
-            get { return data[i]; }
-            set { data[i] = value; }
+            get { return data[i % Width, i / Width]; }
+            set { data[i % Width, i / Width] = value; }
+        }
+        public Point this[int x, int y]
+        {
+            get { return data[x, y]; }
+            set { data[x, y] = value; }
         }
         public int Count { get { return data.Length; } }
+
+        private int width;
+        private int height;
+
+        public int Width { get { return width; } }
+        public int Height { get { return height; } }
 
         public bool IsSynchronized => data.IsSynchronized;
 
         public object SyncRoot => data.SyncRoot;
 
-        public PointCollection(ColorPoint[] data)
+        public PointCollection(int width, int height)
         {
-            this.data = new ColorPoint[data.Length];
+            this.width = width;
+            this.height = height;
+
+            data = new Point[Width, Height];
+        }
+
+        public PointCollection(Point[,] data)
+        {
+            width = data.GetLength(0);
+            height = data.GetLength(1);
+
+            this.data = new Point[Width, Height];
             for (int i = 0; i < data.Length; i++)
             {
-                this[i] = new ColorPoint(data[i]);
+                this[i] = new Point(data[i % Width, i / Width]);
             }
         }
-        public PointCollection(PointCollection pc) : this(pc.data) { }
-        public PointCollection(string base64EncodedData)
-        {
-            if (base64EncodedData == null) throw new MalformedImageException("Image is null");
-            MemoryStream imageStream = new MemoryStream(Encoding.UTF8.GetBytes(base64EncodedData));
-
-            SKBitmap image = SKBitmap.Decode(imageStream);
-
-            SKColor[] pixels = image.Pixels;
-            data = new ColorPoint[pixels.Length];
-            for (int i = 0; i < pixels.Length; i++)
-            {
-                int x = i % image.Width;
-                int y = i / image.Width;
-                data[i] = new ColorPoint((x, y), pixels[i]);
-            }
-        }
-
+        
         public IEnumerator GetEnumerator()
         {
             return data.GetEnumerator();
@@ -264,4 +269,147 @@ namespace AnimChainLib
             data.CopyTo(array, index);
         }
     }
+
+    public class ImageMesh : IEnumerable
+    {
+        public PointCollection Points;
+        public SKColor[] Pixels;
+
+        private int width;
+        private int height;
+
+        public int Width { get { return width; } }
+        public int Height { get { return height; } }
+        public int Count { get { return Pixels.Length; } }
+
+        public (Point[] Corners, SKColor Color) this[int i]
+        {
+            get
+            {
+                return this[i % Width, i / Width];
+            }
+        }
+        public (Point[] Corners, SKColor Color) this[int x, int y]
+        {
+            get
+            {
+                Point[] corners = new Point[4];
+                corners[0] = Points[x    , y    ];
+                corners[1] = Points[x + 1, y    ];
+                corners[2] = Points[x    , y + 1];
+                corners[3] = Points[x + 1, y + 1];
+                return (corners, GetPixel(x, y));
+            }
+        }
+
+        public SKColor GetPixel(int i)
+        {
+            return Pixels[i];
+        }
+        public SKColor GetPixel(int x, int y)
+        {
+            return Pixels[x + Width * y];
+        }
+
+        public ImageMesh(string base64EncodedData)
+        {
+            if (base64EncodedData == null) throw new MalformedImageException("Image is null");
+            MemoryStream imageStream = new MemoryStream(Encoding.UTF8.GetBytes(base64EncodedData));
+
+            SKBitmap image = SKBitmap.Decode(imageStream);
+            width = image.Width;
+            height = image.Height;
+
+            SKColor[] pixels = image.Pixels;
+            Points = new PointCollection(Width + 1, Height + 1);
+
+            Pixels = new SKColor[pixels.Length];
+            for (int i = 0; i < pixels.Length; i++)
+            {
+                Pixels[i] = pixels[i];
+            }
+
+            for (int y = 0; y <= Height; y++)
+            {
+                for (int x = 0; x <= Width; x++)
+                {
+                    double scaledX = 2.0 * x / Width - 1;
+                    double scaledY = 2.0 * y / Height - 1;
+                    Points[x, y] = new Point(scaledX, scaledY);
+                }
+            }
+        }
+
+        public SKBitmap ToRaster()
+        {
+            SKSurface surface = SKSurface.Create(new SKImageInfo(Width, Height));
+            SKCanvas canvas = surface.Canvas;
+
+            canvas.Clear();
+
+            foreach ((Point[] corners, SKColor color) quad in this)
+            {
+                SKPoint[] vertices = quad.corners.Cast<SKPoint>().ToArray();
+                canvas.DrawVertices(SKVertexMode.Triangles, vertices, null, new SKPaint { Color = quad.color });
+            }
+            
+            SKImage snap = surface.Snapshot(new SKRectI(-1, -1, 1, 1));
+            return SKBitmap.FromImage(snap);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return (IEnumerator) GetEnumerator();
+        }
+        public ImageMeshEnum GetEnumerator()
+        {
+            return new ImageMeshEnum(this);
+        }
+    }
+
+    public class ImageMeshEnum : IEnumerator
+    {
+        public ImageMesh _mesh;
+        int position = -1;
+
+        public ImageMeshEnum(ImageMesh mesh)
+        {
+            _mesh = mesh;
+        }
+
+        object IEnumerator.Current
+        {
+            get
+            {
+                return Current;
+            }
+        }
+
+        public (Point[] Corners, SKColor Color) Current
+        {
+            get
+            {
+                try
+                {
+                    return _mesh[position];
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    throw new InvalidOperationException();
+                }
+            }
+        }
+
+        public bool MoveNext()
+        {
+            position++;
+            return (position < _mesh.Count);
+        }
+
+        public void Reset()
+        {
+            position = -1;
+        }
+    }
+
 }
