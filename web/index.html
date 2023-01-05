@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/style.css">
+    <title>Animation Chain</title>
+
+    <script src="js/swap.js"></script>
+</head>
+<body>
+    <div id="main-container">
+        <header>
+            <h1>Animation Chain</h1>
+        </header>
+        <main id="editor-wrapper">
+            <div id="global-controls" class="m-sidebar">
+                <form id="file-upload">
+                    <header id="filename">
+                        filename.pnis
+                    </header>
+                    <img id="file-preview" src="https://thiscatdoesnotexist.com" alt="image preview"/>
+                    <input tabindex="0" type="file" name="file" id="file-button" accept="image/*"/>
+                    <label for="file-button">upload file</label>
+                </form>
+                <form id="submit-controls">
+                    <label for="framerate">Frame Rate:</label>
+                    <select tabindex="0" id="framerate" name="file-type">
+                        <option value="10">10 fps</option>
+                        <option value="12">12 fps</option>
+                        <option value="15">15 fps</option>
+                        <option value="18">18 fps</option>
+                        <option value="24">24 fps</option>
+                        <option value="30">30 fps</option>
+                    </select>
+                    <label for="file-type">Export Format:</label>
+                    <select tabindex="0" id="file-type" name="file-type">
+                        <option value="gif">GIF</option>
+                        <option value="mp4">MP4</option>
+                    </select>
+                    <input tabindex="0" type="submit" id="render" value="Render Animation"/>
+                </form>
+            </div>
+            <div tabindex="0" id="editor">
+                <div tabindex="0" class="m-animation-queue">
+                    <header>
+                        <ul class="m-toolbar s-toolbar--unlabeled">
+                            <li class="m-toolbar__grab">&#x283F;</li>
+                            <li class="m-toolbar__previous"><button tabindex="0" type="button">&#9650;</button></li>
+                            <li class="m-toolbar__next"><button tabindex="0" type="button">&#9660;</button></li>
+                            <li class="m-toolbar__delete"><button tabindex="0" type="button">&#10005;</button></li>
+                        </ul>
+                    </header>
+                    <div class="m-animations-wrapper">
+                        <div tabindex="0" class="m-animation s-animation--enter">
+                            <header>
+                                <ul class="m-toolbar s-toolbar--labeled">
+                                    <li class="m-toolbar__grab">&#x283F;</li>
+                                    <li class="m-toolbar__previous"><button tabindex="0" type="button">&#9664;</button></li>
+                                    <li class="m-toolbar__next"><button tabindex="0" type="button">&#9654;</button></li>
+                                    <li class="m-toolbar__label t-anim-name--display">label</li>
+                                    <li class="m-toolbar__delete"><button tabindex="0" type="button">&#10005;</button></li>
+                                </ul>
+                            </header>
+                            <figure class="m-animation__preview">
+                                <img src="https://thiscatdoesnotexist.com" alt="inject animation type"/>
+                            </figure>
+                            <footer>
+                                <ul class="m-animation__anim-info">
+                                    <li><span class="m-icon t-anim-type--display">&#8635;</span> <span class="t-anim-amount--display"></span>90&deg;</li>
+                                    <li><span class="m-icon">&#x23F2;</span> <span class="t-anim-delay--display">0.5s</span></li>
+                                    <li><span class="m-icon">&#x23F2;</span> <span class="t-anim-duration--display">0.1s</span></li>
+                                </ul>
+                            </footer>
+                        </div>
+                        <div tabindex="0" class="m-animation s-animation--modifier">
+                            <header>
+                                <ul class="m-toolbar s-toolbar--labeled">
+                                    <li class="m-toolbar__grab">&#x283F;</li>
+                                    <li class="m-toolbar__previous"><button tabindex="0" type="button">&#9664;</button></li>
+                                    <li class="m-toolbar__next"><button tabindex="0" type="button">&#9654;</button></li>
+                                    <li class="m-toolbar__label t-anim-name--display">label</li>
+                                    <li class="m-toolbar__delete"><button tabindex="0" type="button">&#10005;</button></li>
+                                </ul>
+                            </header>
+                            <figure class="m-animation__preview">
+                                <img src="https://thiscatdoesnotexist.com" alt="inject animation type"/>
+                            </figure>
+                            <footer>
+                                <ul class="m-animation__anim-info">
+                                    <li><span class="m-icon t-anim-type--display">&#8635;</span> <span class="t-anim-amount--display"></span>90&deg;</li>
+                                    <li><span class="m-icon">&#x23F2;</span> <span class="t-anim-delay--display">0.5s</span></li>
+                                    <li><span class="m-icon">&#x23F2;</span> <span class="t-anim-duration--display">0.1s</span></li>
+                                </ul>
+                            </footer>
+                        </div>
+                        <button tabindex="0" type="button" class="m-add-button t-add-anim">&#x2795;</button>
+                    </div>
+                </div>
+                <div tabindex="0" class="m-animation-queue">
+                    <header>
+                        <ul class="m-toolbar s-toolbar--unlabeled">
+                            <li class="m-toolbar__grab">&#x283F;</li>
+                            <li class="m-toolbar__previous"><button tabindex="0" type="button">&#9650;</button></li>
+                            <li class="m-toolbar__next"><button tabindex="0" type="button">&#9660;</button></li>
+                            <li class="m-toolbar__delete"><button tabindex="0" type="button">&#10005;</button></li>
+                        </ul>
+                    </header>
+                    <div class="m-animations-wrapper">
+                        <div tabindex="0" class="m-animation s-animation--modifier s-grabbing">
+                            <header>
+                                <ul class="m-toolbar s-toolbar--labeled">
+                                    <li class="m-toolbar__grab">&#x283F;</li>
+                                    <li class="m-toolbar__previous"><button tabindex="0" type="button">&#9664;</button></li>
+                                    <li class="m-toolbar__next"><button tabindex="0" type="button">&#9654;</button></li>
+                                    <li class="m-toolbar__label t-anim-name--display">label</li>
+                                    <li class="m-toolbar__delete"><button tabindex="0" type="button">&#10005;</button></li>
+                                </ul>
+                            </header>
+                            <figure class="m-animation__preview">
+                                <img src="https://thiscatdoesnotexist.com" alt="inject animation type"/>
+                            </figure>
+                            <footer>
+                                <ul class="m-animation__anim-info">
+                                    <li><span class="m-icon t-anim-type--display">&#8635;</span> <span class="t-anim-amount--display"></span>90&deg;</li>
+                                    <li><span class="m-icon">&#x23F2;</span> <span class="t-anim-delay--display">0.5s</span></li>
+                                    <li><span class="m-icon">&#x23F2;</span> <span class="t-anim-duration--display">0.1s</span></li>
+                                </ul>
+                            </footer>
+                        </div>
+                        <div tabindex="0" class="m-animation s-animation--modifier">
+                            <header>
+                                <ul class="m-toolbar s-toolbar--labeled">
+                                    <li class="m-toolbar__grab">&#x283F;</li>
+                                    <li class="m-toolbar__previous"><button tabindex="0" type="button">&#9664;</button></li>
+                                    <li class="m-toolbar__next"><button tabindex="0" type="button">&#9654;</button></li>
+                                    <li class="m-toolbar__label t-anim-name--display">label</li>
+                                    <li class="m-toolbar__delete"><button tabindex="0" type="button">&#10005;</button></li>
+                                </ul>
+                            </header>
+                            <figure class="m-animation__preview">
+                                <img src="https://thiscatdoesnotexist.com" alt="inject animation type"/>
+                            </figure>
+                            <footer>
+                                <ul class="m-animation__anim-info">
+                                    <li><span class="m-icon t-anim-type--display">&#8635;</span> <span class="t-anim-amount--display"></span>90&deg;</li>
+                                    <li><span class="m-icon">&#x23F2;</span> <span class="t-anim-delay--display">0.5s</span></li>
+                                    <li><span class="m-icon">&#x23F2;</span> <span class="t-anim-duration--display">0.1s</span></li>
+                                </ul>
+                            </footer>
+                        </div>
+                        <div tabindex="0" class="m-animation s-animation--modifier">
+                            <header>
+                                <ul class="m-toolbar s-toolbar--labeled">
+                                    <li class="m-toolbar__grab">&#x283F;</li>
+                                    <li class="m-toolbar__previous"><button tabindex="0" type="button">&#9664;</button></li>
+                                    <li class="m-toolbar__next"><button tabindex="0" type="button">&#9654;</button></li>
+                                    <li class="m-toolbar__label t-anim-name--display">label</li>
+                                    <li class="m-toolbar__delete"><button tabindex="0" type="button">&#10005;</button></li>
+                                </ul>
+                            </header>
+                            <figure class="m-animation__preview">
+                                <img src="https://thiscatdoesnotexist.com" alt="inject animation type"/>
+                            </figure>
+                            <footer>
+                                <ul class="m-animation__anim-info">
+                                    <li><span class="m-icon t-anim-type--display">&#8635;</span> <span class="t-anim-amount--display"></span>90&deg;</li>
+                                    <li><span class="m-icon">&#x23F2;</span> <span class="t-anim-delay--display">0.5s</span></li>
+                                    <li><span class="m-icon">&#x23F2;</span> <span class="t-anim-duration--display">0.1s</span></li>
+                                </ul>
+                            </footer>
+                        </div>
+                        <button tabindex="0" type="button" class="m-add-button t-add-anim">&#x2795;</button>
+                    </div>
+                </div>
+                <div tabindex="0" class="m-animation-queue">
+                    <header>
+                        <ul class="m-toolbar s-toolbar--unlabeled">
+                            <li class="m-toolbar__grab">&#x283F;</li>
+                            <li class="m-toolbar__previous"><button tabindex="0" type="button">&#9650;</button></li>
+                            <li class="m-toolbar__next"><button tabindex="0" type="button">&#9660;</button></li>
+                            <li class="m-toolbar__delete"><button tabindex="0" type="button">&#10005;</button></li>
+                        </ul>
+                    </header>
+                    <div class="m-animations-wrapper">
+                        <div tabindex="0" class="m-animation s-animation--exit">
+                            <header>
+                                <ul class="m-toolbar s-toolbar--labeled">
+                                    <li class="m-toolbar__grab">&#x283F;</li>
+                                    <li class="m-toolbar__previous"><button tabindex="0" type="button">&#9664;</button></li>
+                                    <li class="m-toolbar__next"><button tabindex="0" type="button">&#9654;</button></li>
+                                    <li class="m-toolbar__label t-anim-name--display">label</li>
+                                    <li class="m-toolbar__delete"><button tabindex="0" type="button">&#10005;</button></li>
+                                </ul>
+                            </header>
+                            <figure class="m-animation__preview">
+                                <img src="https://thiscatdoesnotexist.com" alt="inject animation type"/>
+                            </figure>
+                            <footer>
+                                <ul class="m-animation__anim-info">
+                                    <li><span class="m-icon t-anim-type--display">&#8635;</span> <span class="t-anim-amount--display"></span>90&deg;</li>
+                                    <li><span class="m-icon">&#x23F2;</span> <span class="t-anim-delay--display">0.5s</span></li>
+                                    <li><span class="m-icon">&#x23F2;</span> <span class="t-anim-duration--display">0.1s</span></li>
+                                </ul>
+                            </footer>
+                        </div>
+                        <button type="button" class="m-add-button t-add-anim">&#x2795;</button>
+                    </div>
+                </div>
+                <button type="button" tabindex="0" class="m-add-button t-add-queue">&#x2795;</button>
+            </div>
+            <div class="m-sidebar">
+                <form id="control-panel">
+                    <header>
+                        <h2>editing <span class="t-active-anim-name--display">penis penis penis penis</span></h2>
+                    </header>
+                    <div id="animation-select-wrapper">
+                        <label for="animation-select">Animation:</label>
+                        <select id="animation-select" name="animation">
+                            <optgroup label="Entrances">
+                                <option value="penis">penis</option>
+                                <option value="penis">penis</option>
+                                <option value="penis">penis</option>
+                            </optgroup>
+                            <optgroup label="Modifiers">
+                                <option value="penis">penis</option>
+                                <option value="penis">penis</option>
+                                <option value="penis">penis</option>
+                            </optgroup>
+                            <optgroup label="Exits">
+                                <option value="penis">penis</option>
+                                <option value="penis">penis</option>
+                                <option value="penis">penis</option>
+                            </optgroup>
+                        </select>
+                        <img src="https://thiscatdoesnotexist.com" alt="inject animation type"/>
+                    </div>
+                    <ul id="specific-controls">
+                        <li><label for="control-id-1" class="t-control__label">label-name:</label><input class="t-control" id="control-id-1"/></li>
+                        <li><label for="control-id-2" class="t-control__label">label-name:</label><input class="t-control" id="control-id-2"/></li>
+                        <li><label for="control-id-3" class="t-control__label">label-name:</label><input class="t-control" id="control-id-3"/></li>
+                    </ul>
+                    <ul id="timing-controls">
+                        <li><label for="delay">delay:</label><input type="number" id="delay" name="delay"/></li>
+                        <li><label for="duration">duration:</label><input type="number" id="duration" name="duration"/></li>
+                    </ul>
+                </form>
+            </div>
+        </main>
+    </div>
+    <footer>
+        created by me
+        <a>check out the source <3</a>
+    </footer>
+</body>
+</html>
