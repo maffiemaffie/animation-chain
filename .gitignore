@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 .vscode/settings.json
 .DS_Store
+AnimChainApp/AnimChain/Properties/launchSettings.json
