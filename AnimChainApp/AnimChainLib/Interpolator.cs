@@ -14,13 +14,12 @@ namespace AnimChainLib
 
 		public abstract double Interpolate(int frame);
 
-		public Interpolator(int start, int end)
-		{
+		public Interpolator(int start, int duration)
+        {
 			this.start = start;
-			this.end = end;
-		}
-
-		public Interpolator(int start, int duration): this()
+			this.end = start + duration;
+        }
+		public Interpolator(int queueStart, int delay, int duration) : this(queueStart + delay, duration);
 	}
 }
 

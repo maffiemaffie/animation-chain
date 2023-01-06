@@ -4,10 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using SkiaSharp;
+
 namespace AnimChainLib
 {
-    abstract class Transformer
+    public delegate T Transformation<T>(T value, int frame);
+    public interface ITransformable<T>
     {
-        public abstract (double x, double y) Transform((double x, double y) point, double fac);
+        void Transform(double factor, ITransformer<T> transformer);
+        void Transform(double factor, Transformation<T> transformation);
+    }
+
+    public interface ITransformer<T>
+    {
+        T Transform(T value, double factor);
     }
 }

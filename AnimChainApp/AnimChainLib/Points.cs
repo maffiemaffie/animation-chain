@@ -210,7 +210,7 @@ namespace AnimChainLib
         }
     }
 
-    public class PointCollection : IEnumerable, ICollection
+    public class PointCollection : IEnumerable, ICollection, ICloneable
     {
         private Point[,] data;
         public Point[,] Data
@@ -236,7 +236,6 @@ namespace AnimChainLib
         public int Height { get { return height; } }
 
         public bool IsSynchronized => data.IsSynchronized;
-
         public object SyncRoot => data.SyncRoot;
 
         public PointCollection(int width, int height)
@@ -246,7 +245,6 @@ namespace AnimChainLib
 
             data = new Point[Width, Height];
         }
-
         public PointCollection(Point[,] data)
         {
             width = data.GetLength(0);
@@ -268,9 +266,18 @@ namespace AnimChainLib
         {
             data.CopyTo(array, index);
         }
+
+        public PointCollection Clone()
+        {
+            return new PointCollection(data);
+        }
+        object ICloneable.Clone()
+        {
+            throw new NotImplementedException();
+        }
     }
 
-    public class ImageMesh : IEnumerable
+    public class ImageMesh : IEnumerable,ICloneable,IAnimatable<ImageMesh>
     {
         public PointCollection Points;
         public SKColor[] Pixels;
@@ -339,6 +346,13 @@ namespace AnimChainLib
                 }
             }
         }
+        private ImageMesh(PointCollection points, SKColor[] pixels, int width, int height)
+        {
+            Points = points;
+            Pixels = pixels;
+            this.width = width;
+            this.height = height;
+        }
 
         public SKBitmap ToRaster()
         {
@@ -364,6 +378,33 @@ namespace AnimChainLib
         public ImageMeshEnum GetEnumerator()
         {
             return new ImageMeshEnum(this);
+        }
+
+        public void Animate(double factor, IAnimator<ImageMesh> animator)
+        {
+            ImageMesh animated = animator.Animate(Clone(), factor);
+            Points = animated.Points;
+            Pixels = animated.Pixels;
+        }
+        public void Animate(double factor, Animation<ImageMesh> animation)
+        {
+            ImageMesh animated = animation(Clone(), factor);
+            Points = animated.Points;
+            Pixels = animated.Pixels;
+        }
+
+        public ImageMesh Clone()
+        {
+            PointCollection _points = Points.Clone();
+            SKColor[] _pixels = (SKColor[])Pixels.Clone();
+            int _width = Width;
+            int _height = Height;
+
+            return new ImageMesh(_points, _pixels, _width, _height);
+        }
+        object ICloneable.Clone()
+        {
+            return Clone();
         }
     }
 
@@ -411,5 +452,4 @@ namespace AnimChainLib
             position = -1;
         }
     }
-
 }
