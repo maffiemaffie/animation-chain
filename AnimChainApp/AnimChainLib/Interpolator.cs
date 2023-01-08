@@ -19,7 +19,7 @@ namespace AnimChainLib
 			this.start = start;
 			this.end = start + duration;
         }
-		public Interpolator(int queueStart, int delay, int duration) : this(queueStart + delay, duration);
+		public Interpolator(int queueStart, int delay, int duration) : this(queueStart + delay, duration) { };
 	}
 }
 
