@@ -20,17 +20,12 @@ namespace AnimChainLib
         T Animate(T value, int frame);
     }
 
-    public abstract class Animator<T> : IAnimator<T>
-    {
-        public abstract T Animate(T value, int frame);
-    }
-
-    public abstract class Animator : Animator<ImageMesh>
+    public abstract class ImageMeshAnimator : IAnimator<ImageMesh>
     {
         private ITransformer<Point> transformer;
         private Interpolator interpolator;
 
-        public override ImageMesh Animate(ImageMesh value, int frame)
+        public ImageMesh Animate(ImageMesh value, int frame)
         {
             double factor = interpolator.Interpolate(frame);
             foreach (Point point in value.Points)

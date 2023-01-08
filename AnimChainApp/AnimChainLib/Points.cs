@@ -162,7 +162,7 @@ namespace AnimChainLib
     //    }
     //}
 
-    public struct Point
+    public struct Point : ITransformable<Point>
     {
         public double X;
         public double Y;
@@ -175,6 +175,7 @@ namespace AnimChainLib
             Y = y;
         }
         public Point((double x, double y) point) : this(point.x, point.y) { }
+        public Point(Point point) : this(point.X, point.Y) { }
 
         public static Point operator +(Point p1, Point p2)
         {
@@ -207,6 +208,19 @@ namespace AnimChainLib
         public static Point operator /(Point p1, double scale)
         {
             return new Point(p1.X / scale, p1.Y / scale);
+        }
+
+        public void Transform(double factor, ITransformer<Point> transformer)
+        {
+            Point transformed = transformer.Transform(this, factor);
+            X = transformed.X;
+            Y = transformed.Y;
+        }
+        public void Transform(double factor, Transformation<Point> transformation)
+        {
+            Point transformed = transformation(this, factor);
+            X = transformed.X;
+            Y = transformed.Y;
         }
     }
 
@@ -380,15 +394,15 @@ namespace AnimChainLib
             return new ImageMeshEnum(this);
         }
 
-        public void Animate(double factor, IAnimator<ImageMesh> animator)
+        public void Animate(int frame, IAnimator<ImageMesh> animator)
         {
-            ImageMesh animated = animator.Animate(Clone(), factor);
+            ImageMesh animated = animator.Animate(Clone(), frame);
             Points = animated.Points;
             Pixels = animated.Pixels;
         }
-        public void Animate(double factor, Animation<ImageMesh> animation)
+        public void Animate(int frame, Animation<ImageMesh> animation)
         {
-            ImageMesh animated = animation(Clone(), factor);
+            ImageMesh animated = animation(Clone(), frame);
             Points = animated.Points;
             Pixels = animated.Pixels;
         }

@@ -8,7 +8,7 @@ using SkiaSharp;
 
 namespace AnimChainLib
 {
-    public delegate T Transformation<T>(T value, int frame);
+    public delegate T Transformation<T>(T value, double factor);
     public interface ITransformable<T>
     {
         void Transform(double factor, ITransformer<T> transformer);
