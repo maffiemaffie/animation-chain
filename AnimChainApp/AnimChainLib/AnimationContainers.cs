@@ -46,9 +46,8 @@ namespace AnimChainLib
 
 			foreach (AnimationQueue queue in queues)
 			{
-				List<SKBitmap> rasterizedFrames = queue.Render(image, frame++).Cast<SKBitmap>()
-
-                this.rendered.AddRange()
+				List<SKBitmap> rasterizedFrames = new List<SKBitmap>( queue.Render(image, frame++).Cast<SKBitmap>() ); // render and rasterize queue
+				rendered.AddRange(rasterizedFrames);
 			}
 
 			return rendered;
@@ -62,6 +61,26 @@ namespace AnimChainLib
 		/// will be used to perform the animation.
 		/// </summary>
 		private List<ImageMeshAnimator> animations;
+
+		/// <summary>
+		/// Instance variable represents the first frame this AnimationQueue will be active on.
+		/// </summary>
+		private int start;
+
+		/// <summary>
+		/// Instance variable represents the last frame this AnimationQueue will be active on.
+		/// </summary>
+		private int end;
+
+		/// <value>
+		/// Property represents the first frame this AnimationQueue will be active on.
+		/// </value>
+		public int Start { get { return start; } }
+
+		/// <value>
+		/// Property represents the last frame this AnimationQueue will be active on.
+		/// </value>
+		public int End { get { return end; } }
 
         /// <summary>
         /// Constructor initializes a new instance of the <see cref="AnimationQueue"/> class

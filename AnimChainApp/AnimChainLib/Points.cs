@@ -649,6 +649,13 @@ namespace AnimChainLib
         }
 
         /// <summary>
+        /// Operator explicitly casts ImageMesh to an <see cref="SKBitmap"/> object through rasterization.
+        /// </summary>
+        /// <param name="m">The ImageMesh to be cast</param>
+        /// <seealso cref="SKBitmap"/>
+        public static explicit operator SKBitmap(ImageMesh m) => m.ToRaster();
+
+        /// <summary>
         /// Method renders the current MeshImage back into a raster image.
         /// </summary>
         /// <returns>A raster image representing the current MeshImage, bounded to it's original dimensions.</returns>
