@@ -262,7 +262,7 @@ namespace AnimChainLib
         {
             return new Point(p1.X * scale, p1.Y * scale);
         }
-
+        
         /// <summary>
         /// Operator divides one Point from another by dividing corresponding terms.
         /// </summary>
@@ -586,20 +586,17 @@ namespace AnimChainLib
         }
 
         /// <summary>
-        /// Constructor initializes a new instance of the <see cref="ImageMesh"/> class constructed from image data.
+        /// Constructor initializes a new instance of the <see cref="ImageMesh"/> class constructed from an image.
         /// </summary>
-        /// <param name="base64EncodedData">A base-64 string on image data.</param>
-        /// <exception cref="MalformedImageException"><paramref name="base64EncodedData"/> is <see langword="null"/>.</exception>
-        public ImageMesh(string base64EncodedData)
+        /// <param name="image">The image from which the new ImageMesh will be constructed from.</param>
+        /// <seealso cref="SKBitmap"/>
+        public ImageMesh(SKBitmap image)
         {
-            if (base64EncodedData == null) throw new MalformedImageException("Image is null");
-            MemoryStream imageStream = new MemoryStream(Encoding.UTF8.GetBytes(base64EncodedData));
+            SKColor[] pixels = image.Pixels;
 
-            SKBitmap image = SKBitmap.Decode(imageStream); // create image from data
-            width = image.Width; 
+            width = image.Width;
             height = image.Height;
 
-            SKColor[] pixels = image.Pixels;
             Points = new PointCollection(Width + 1, Height + 1);
 
             Pixels = new SKColor[pixels.Length];
@@ -617,6 +614,23 @@ namespace AnimChainLib
                     Points[x, y] = new Point(scaledX, scaledY); // initialize mesh points
                 }
             }
+        }
+
+        /// <summary>
+        /// Constructor initializes a new instance of the <see cref="ImageMesh"/> class constructed from image data.
+        /// </summary>
+        /// <param name="base64EncodedData">A base-64 string on image data.</param>
+        /// <exception cref="MalformedImageException"><paramref name="base64EncodedData"/> is <see langword="null"/>.</exception>
+        public ImageMesh(string base64EncodedData) : this(base64ToImage(base64EncodedData)) { }
+
+        private static SKBitmap base64ToImage(string base64EncodedData)
+        {
+            if (base64EncodedData == null) throw new MalformedImageException("Image is null");
+            MemoryStream imageStream = new MemoryStream(Encoding.UTF8.GetBytes(base64EncodedData));
+
+            SKBitmap image = SKBitmap.Decode(imageStream); // create image from data
+
+            return image;
         }
 
         /// <summary>

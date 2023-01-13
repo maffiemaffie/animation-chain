@@ -53,4 +53,3 @@ namespace AnimChainLib
 		public Interpolator(int queueStart, int delay, int duration) : this(queueStart + delay, duration) { }
 	}
 }
-
