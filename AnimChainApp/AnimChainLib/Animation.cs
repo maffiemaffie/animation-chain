@@ -71,6 +71,11 @@ namespace AnimChainLib
         /// </summary>
         private readonly Interpolator interpolator;
 
+        /// <value>
+        /// Property represents the full duration to the end of this animation including delay time.
+        /// </value>
+        public int Duration { get { return interpolator.FullDuration; } }
+
         /// <summary>
         /// Constructor initializes a new instance of the <see cref="ImageMeshAnimator"/> class with the specified transformer and interpolator.
         /// </summary>

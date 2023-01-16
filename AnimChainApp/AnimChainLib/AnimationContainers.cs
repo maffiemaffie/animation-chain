@@ -37,20 +37,58 @@ namespace AnimChainLib
 		{
 			this.image = image;
 			this.queues = queues;
-			this.rendered = new List<SKBitmap>();
+			rendered = new List<SKBitmap>();
 		}
 
+		/// <summary>
+		/// Method renders and rasterizes the full animation to images.
+		/// </summary>
+		/// <returns>The rendered images.</returns>
 		public List<SKBitmap> Render()
 		{
-			int frame = 0;
-
-			foreach (AnimationQueue queue in queues)
+			for (int i = 0; i < queues.Count; i++) // for each queue
 			{
-				List<SKBitmap> rasterizedFrames = new List<SKBitmap>( queue.Render(image, frame++).Cast<SKBitmap>() ); // render and rasterize queue
-				rendered.AddRange(rasterizedFrames);
+				for (int frame = GetQueueStart(i); frame < GetQueueEnd(i); frame++) // for each frame within the queue
+				{
+					SKBitmap renderedFrame = (SKBitmap)queues[i].Render(image, frame);
+					rendered.Add(renderedFrame);
+				}
 			}
-
 			return rendered;
+		}
+
+		/// <summary>
+		/// Method returns the first global frame the specified <see cref="AnimationQueue"/> will be active on.
+		/// </summary>
+		/// <param name="queueIndex">The index of the specified AnimationQueue.</param>
+		/// <returns>The first global frame the specified AnimationQueue will be active on.</returns>
+		/// <exception cref="ArgumentOutOfRangeException"><paramref name="queueIndex"/> corresponds to a queue that doesn't exist.</exception>
+		private int GetQueueStart(int queueIndex)
+        {
+			if (queueIndex < 0) throw new ArgumentOutOfRangeException(nameof(queueIndex), "Index must be greater than or equal to 0.");
+			if (queueIndex >= queues.Count) throw new ArgumentOutOfRangeException(nameof(queueIndex), $"Index out of range (there are only {queues.Count} queues.");
+
+			int start = 0;
+			for (int i = 0; i < queueIndex; i++)
+				start += queues[i].Duration;
+			return start;
+        }
+
+		/// <summary>
+		/// Method returns the last global frame the specified <see cref="AnimationQueue"/> will be active on.
+		/// </summary>
+		/// <param name="queueIndex">The index of the specified AnimationQueue.</param>
+		/// <returns>The first global frame the specified AnimationQueue will be active on.</returns>
+		/// <exception cref="ArgumentOutOfRangeException"><paramref name="queueIndex"/> corresponds to a queue that doesn't exist.</exception>
+		private int GetQueueEnd(int queueIndex)
+        {
+			if (queueIndex < 0) throw new ArgumentOutOfRangeException(nameof(queueIndex), "Index must be greater than or equal to 0.");
+			if (queueIndex >= queues.Count) throw new ArgumentOutOfRangeException(nameof(queueIndex), $"Index out of range (there are only {queues.Count} queues.");
+
+			int end = 0;
+			for (int i = 0; i <= queueIndex; i++)
+				end += queues[i].Duration;
+			return end;
 		}
 	}
 
@@ -62,25 +100,19 @@ namespace AnimChainLib
 		/// </summary>
 		private List<ImageMeshAnimator> animations;
 
-		/// <summary>
-		/// Instance variable represents the first frame this AnimationQueue will be active on.
-		/// </summary>
-		private int start;
-
-		/// <summary>
-		/// Instance variable represents the last frame this AnimationQueue will be active on.
-		/// </summary>
-		private int end;
-
 		/// <value>
-		/// Property represents the first frame this AnimationQueue will be active on.
+		/// Property represents the duration in frames until the last animation is complete.
 		/// </value>
-		public int Start { get { return start; } }
-
-		/// <value>
-		/// Property represents the last frame this AnimationQueue will be active on.
-		/// </value>
-		public int End { get { return end; } }
+		public int Duration
+        {
+			get
+            {
+				int end = 0;
+				for (int i = 0; i < animations.Count; i++)
+					if (animations[i].Duration > end) end = animations[i].Duration;
+				return end;
+            }
+        }
 
         /// <summary>
         /// Constructor initializes a new instance of the <see cref="AnimationQueue"/> class

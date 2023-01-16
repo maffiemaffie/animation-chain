@@ -19,9 +19,14 @@ namespace AnimChainLib
 		private int end;
 
 		/// <value>
-		/// Property gets the duration between the start and end.
+		/// Property represents the duration between the start and end.
 		/// </value>
 		public int Duration { get { return end - start; } }
+
+		/// <value>
+		/// Property represents the full duration to the end of this interpolator including delay time.
+		/// </value>
+		public int FullDuration { get { return end; } }
 
 		/// <summary>
 		/// Method rescales a specified value to an expected range of [0, 1].
@@ -35,21 +40,13 @@ namespace AnimChainLib
 		/// <summary>
 		/// Constructor initializes a new instance of the <see cref="Interpolator"/> class with the specified start and duration.
 		/// </summary>
-		/// <param name="start">The frame at which the new Interpolator will start from.</param>
-		/// <param name="duration">The duration between start and end of the new Interpolator.</param>
-		public Interpolator(int start, int duration)
-        {
-			this.start = start;
-			this.end = start + duration;
-        }
-
-		/// <summary>
-		/// Constructor initializes a new instance of the <see cref="Interpolator"/> class with the specified delay and duration.
-		/// </summary>
-		/// <param name="queueStart">The start frame of the <see cref="AnimationQueue"/> the new Interpolator is contained within.</param>
-		/// <param name="delay">The delay to the beginning of the new Interpolator.</param>
+		/// <param name="delay">The frame at which the new Interpolator will start from, relative to its parent <see cref="AnimationQueue"/>.</param>
 		/// <param name="duration">The duration between start and end of the new Interpolator.</param>
 		/// <seealso cref="AnimationQueue"/>
-		public Interpolator(int queueStart, int delay, int duration) : this(queueStart + delay, duration) { }
+		public Interpolator(int delay, int duration)
+        {
+			this.start = delay;
+			this.end = start + duration;
+        }
 	}
 }
