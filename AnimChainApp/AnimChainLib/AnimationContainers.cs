@@ -28,17 +28,36 @@ namespace AnimChainLib
         private List<SKBitmap> rendered;
 
 		/// <summary>
+		/// Constructor initializes a new instance of the <see cref="AnimationChain"/> class from the specified image.
+		/// </summary>
+		/// <param name="image">The image to be animated by this AnimationChain.</param>
+		public AnimationChain(SKBitmap image)
+        {
+			this.image = image;
+			queues = new List<AnimationQueue>();
+			rendered = new List<SKBitmap>();
+        }
+
+		/// <summary>
 		/// Constructor initializes a new instance of the <see cref="AnimationChain"/> class from the specified image
 		/// and animation queues. 
 		/// </summary>
-		/// <param name="image">The image to be animated by this AnimationQueue.</param>
+		/// <param name="image">The image to be animated by this AnimationChain.</param>
 		/// <param name="queues">The animation queues to perform on <paramref name="image"/>.</param>
-		public AnimationChain(SKBitmap image, List<AnimationQueue> queues)
+		public AnimationChain(SKBitmap image, List<AnimationQueue> queues) : this(image)
 		{
-			this.image = image;
 			this.queues = queues;
-			rendered = new List<SKBitmap>();
 		}
+
+		/// <summary>
+		/// Method adds a queue to the end of the chain. 
+		/// </summary>
+		/// <param name="queue">The queue that will be added to the chain.</param>
+		/// <seealso cref="List{T}.Add(T)"/>
+		public void Add(AnimationQueue queue)
+        {
+			queues.Add(queue);
+        }
 
 		/// <summary>
 		/// Method renders and rasterizes the full animation to images.
@@ -114,6 +133,14 @@ namespace AnimChainLib
             }
         }
 
+		/// <summary>
+		/// Constructor initializes a new instance of the <see cref="AnimationQueue"/> class.
+		/// </summary>
+		public AnimationQueue()
+        {
+			animations = new List<ImageMeshAnimator>();
+        }
+
         /// <summary>
         /// Constructor initializes a new instance of the <see cref="AnimationQueue"/> class
         /// with the specified animations.
@@ -125,6 +152,16 @@ namespace AnimChainLib
 		{
 			this.animations = animations;
 		}
+
+		/// <summary>
+		/// Method adds an animation to the end of the queue.
+		/// </summary>
+		/// <param name="animation">The animation that will be added to the end of the queue.</param>
+		/// <seealso cref="List{T}.Add(T)"/>
+		public void Add(ImageMeshAnimator animation)
+        {
+			animations.Add(animation);
+        }
 
 		/// <summary>
 		/// Animates an <see cref="ImageMesh"/> through the local queue.
