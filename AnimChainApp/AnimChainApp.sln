@@ -3,9 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimChain", "AnimChain\AnimChain.csproj", "{5C9F6CD9-96CA-428D-82E7-05D6C2AF452A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimChain", "AnimChain\AnimChain.csproj", "{5C9F6CD9-96CA-428D-82E7-05D6C2AF452A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56A36A86-87A5-4131-909D-811613D549AC} = {56A36A86-87A5-4131-909D-811613D549AC}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimChainLib", "AnimChainLib\AnimChainLib.csproj", "{56A36A86-87A5-4131-909D-811613D549AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimChainLib", "AnimChainLib\AnimChainLib.csproj", "{56A36A86-87A5-4131-909D-811613D549AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

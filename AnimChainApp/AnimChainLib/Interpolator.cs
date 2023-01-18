@@ -1,5 +1,4 @@
-﻿using System;
-namespace AnimChainLib
+﻿namespace AnimChainLib
 {
 	/// <summary>
 	/// Rescales time to a factor accepted by the <see cref="ITransformer{T}"/>.
