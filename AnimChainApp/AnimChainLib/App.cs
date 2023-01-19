@@ -15,8 +15,8 @@
         /// <summary>
         /// Constructor initializes a new instance of the <see cref="AnimChainApp"/> class with the specified AnimationChan and configuration settings.
         /// </summary>
-        /// <param name="chain"></param>
-        /// <param name="configs"></param>
+        /// <param name="chain">The AnimationChain that will be used to render the animation.</param>
+        /// <param name="configs">The configuration settings that will be used to export the animation.</param>
         public AnimationChainApp(AnimationChain chain, AppConfigs configs)
         {
             this.chain = chain;
