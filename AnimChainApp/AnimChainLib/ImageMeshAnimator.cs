@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Newtonsoft.Json.Converters;
+using Newtonsoft.Json;
 
 namespace AnimChainLib
 {
@@ -90,6 +90,9 @@ namespace AnimChainLib
 
             string transformerConfigs = null;
             string interpolatorConfigs = null;
+
+            JObject json = JObject.Parse(configs);
+            transformerConfigs = (string)json[""]
 
             transformer = PointTransformerFactory.GetTransformer(transformerType, transformerConfigs);
             interpolator = InterpolatorFactory.GetInterpolator(interpolatorType, interpolatorConfigs);
