@@ -93,9 +93,6 @@ namespace AnimChainLib
             string transformerConfigs = (string)jConfigs["animation"]["configs"];
             string interpolatorConfigs = (string)jConfigs["timing"]["configs"];
 
-            JObject json = JObject.Parse(configs);
-            transformerConfigs = (string)json[""]
-
             transformer = PointTransformerFactory.GetTransformer(transformerType, transformerConfigs);
             interpolator = InterpolatorFactory.GetInterpolator(interpolatorType, interpolatorConfigs);
 
