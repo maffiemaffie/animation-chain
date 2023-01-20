@@ -88,8 +88,10 @@ namespace AnimChainLib
             ITransformer<Point> transformer;
             Interpolator interpolator;
 
-            string transformerConfigs = null;
-            string interpolatorConfigs = null;
+            JObject jConfigs = JObject.Parse(configs);
+
+            string transformerConfigs = (string)jConfigs["animation"]["configs"];
+            string interpolatorConfigs = (string)jConfigs["timing"]["configs"];
 
             transformer = PointTransformerFactory.GetTransformer(transformerType, transformerConfigs);
             interpolator = InterpolatorFactory.GetInterpolator(interpolatorType, interpolatorConfigs);
@@ -113,6 +115,14 @@ namespace AnimChainLib
         {
             ITransformer<Point> transformer = null;
 
+            switch (type)
+            {
+                case PointTransformerType./*TODO*/:
+                    transformer = JsonConvert.DeserializeObject</*TODO*/>(configs);
+                    break;
+                    // etc
+            }
+
             return transformer;
         }
     }
@@ -132,6 +142,14 @@ namespace AnimChainLib
         {
             Interpolator interpolator = null;
 
+            switch (type)
+            {
+                case Interpolator./*TODO*/:
+                    interpolator = JsonConvert.DeserializeObject</*TODO*/>(configs);
+                    break;
+                    // etc
+            }
+
             return interpolator;
         }
     }
@@ -141,7 +159,7 @@ namespace AnimChainLib
     /// </summary>
     public enum PointTransformerType
     {
-
+        
     }
 
     /// <summary>
