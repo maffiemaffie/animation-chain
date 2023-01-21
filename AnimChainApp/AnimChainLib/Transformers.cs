@@ -74,7 +74,28 @@
 
             double _rotation = rotation * factor;
 
-            _x = _x * (Math.Cos(_rotation) + _x * (1 - Math.Cos(_rotation))) + _y * _x * _y * (1 - Math.Cos(_rotation));
+            double _ux = Math.Cos(direction);
+            double _uy = Math.Sin(direction);
+
+            double cosTheta = Math.Cos(_rotation);
+
+            _x = _x * (cosTheta + _ux * _ux * (1 - cosTheta)) + _y * (_ux * _uy * (1 - cosTheta));
+            _y = _x * (_uy * _ux * (1 - cosTheta)) + _y * (cosTheta + _uy * _uy * (1 - cosTheta));
+
+            return new Point(_x, _y);
+        }
+    }
+
+    public class Zoom : ITransformer<Point>
+    {
+        private readonly double from;
+        private readonly double to;
+
+        public Point Transform(Point value, double factor)
+        {
+            double zoom = from + factor * (to - from);
+
+            return value * zoom;
         }
     }
 }
