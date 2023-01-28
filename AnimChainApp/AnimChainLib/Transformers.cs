@@ -26,13 +26,13 @@
 
             if (direction == Direction.Horizontal)
             {
-                if (value.X < 0) _x = -factor;
-                else _x = factor;
+                if (value.X < 0) _x -= 1 - factor;
+                else _x += 1 - factor;
             }
             else
             {
-                if (value.Y < 0) _y = -factor;
-                else _y = factor;
+                if (value.Y < 0) _y -= 1 - factor;
+                else _y += 1 - factor;
             }
 
             return new Point(_x, _y);

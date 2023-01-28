@@ -135,7 +135,11 @@ namespace AnimChain
     /// </summary>
     public enum PointTransformerType
     {
-
+        FlyIn,
+        SplitIn,
+        Spin,
+        Swivel,
+        Zoom
     }
 
     /// <summary>
