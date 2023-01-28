@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace AnimChainLib
 {
@@ -69,104 +70,5 @@ namespace AnimChainLib
             }
             return value;
         }
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ImageMeshAnimator"/> class with the specified transform type, interpolator type, and configs.
-    /// </summary>
-    public class ImageMeshAnimatorFactory
-    {
-        /// <summary>
-        /// Method initializes a new instance of the <see cref="ImageMeshAnimator"/> class with the specified transform type, interpolator type, and configs.
-        /// </summary>
-        /// <param name="transformerType">The <see cref="ITransformer{Point}"/> implementation that will be used by the new ImageMeshAnimator.</param>
-        /// <param name="interpolatorType">The <see cref="Interpolator"/> implementation that will be used by the new ImageMeshAnimator.</param>
-        /// <param name="configs">The JSON configs that will be used by the new ImageMeshAnimator.</param>
-        /// <returns></returns>
-        public static ImageMeshAnimator GetAnimator(PointTransformerType transformerType, InterpolatorType interpolatorType, string configs)
-        {
-            ITransformer<Point> transformer;
-            Interpolator interpolator;
-
-            JObject jConfigs = JObject.Parse(configs);
-
-            string transformerConfigs = (string)jConfigs["animation"]["configs"];
-            string interpolatorConfigs = (string)jConfigs["timing"]["configs"];
-
-            transformer = PointTransformerFactory.GetTransformer(transformerType, transformerConfigs);
-            interpolator = InterpolatorFactory.GetInterpolator(interpolatorType, interpolatorConfigs);
-
-            return new ImageMeshAnimator(transformer, interpolator);
-        }
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the specified <see cref="ITransformer{Point}"/> implementation with the specified configs.
-    /// </summary>
-    public class PointTransformerFactory
-    {
-        /// <summary>
-        /// Method initializes a new instance of the specified <see cref="ITransformer{Point}"/> implementation with the specified configs.
-        /// </summary>
-        /// <param name="type">The <see cref="ITransformer{Point}"/> implementation of the new transformer..</param>
-        /// <param name="configs">The JSON configs that will be used by the new transformer.</param>
-        /// <returns></returns>
-        public static ITransformer<Point> GetTransformer(PointTransformerType type, string configs)
-        {
-            ITransformer<Point> transformer = null;
-
-            switch (type)
-            {
-                case PointTransformerType./*TODO*/:
-                    transformer = JsonConvert.DeserializeObject</*TODO*/>(configs);
-                    break;
-                    // etc
-            }
-
-            return transformer;
-        }
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the specified <see cref="Interpolator"/> implementation with the specified configs.
-    /// </summary>
-    public static class InterpolatorFactory
-    {
-        /// <summary>
-        /// Method initializes a new instance of the specified <see cref="Interpolator"/> implementation with the specified configs.
-        /// </summary>
-        /// <param name="type">The <see cref="Interpolator"/> implementation of the new interpolator.</param>
-        /// <param name="configs">The JSON configs that will be used by the new interpolator.</param>
-        /// <returns></returns>
-        public static Interpolator GetInterpolator(InterpolatorType type, string configs)
-        {
-            Interpolator interpolator = null;
-
-            switch (type)
-            {
-                case Interpolator./*TODO*/:
-                    interpolator = JsonConvert.DeserializeObject</*TODO*/>(configs);
-                    break;
-                    // etc
-            }
-
-            return interpolator;
-        }
-    }
-
-    /// <summary>
-    /// Specifies a <see cref="ITransformer{Point}"/> implementation.
-    /// </summary>
-    public enum PointTransformerType
-    {
-        
-    }
-
-    /// <summary>
-    /// Specifies a <see cref="Interpolator"/> implementation.
-    /// </summary>
-    public enum InterpolatorType
-    {
-        
     }
 }
