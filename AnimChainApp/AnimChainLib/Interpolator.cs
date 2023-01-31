@@ -10,12 +10,12 @@
 		/// <summary>
 		/// Instance variable represents the lower bound.
 		/// </summary>
-		private int start;
+		protected int start;
 
 		/// <summary>
 		/// Instance variable represents the upper bound.
 		/// </summary>
-		private int end;
+		protected int end;
 
 		/// <value>
 		/// Property represents the duration between the start and end.

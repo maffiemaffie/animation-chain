@@ -44,18 +44,6 @@ namespace AnimChainLib
         }
 
         /// <summary>
-        /// Method returns a new instance of the <see cref="ImageMeshAnimator"/> class with the specified parameters. 
-        /// </summary>
-        /// <param name="transformerType">The <see cref="ITransformer{Point}"/> implementation that will be used by the new ImageMeshAnimator.</param>
-        /// <param name="interpolatorType">The <see cref="Interpolator"/> implementation that will be used by the new ImageMeshAnimator.</param>
-        /// <param name="configs">The JSON configs that will be used by the new ImageMeshAnimator.</param>
-        /// <returns>The new ImageMeshAnimator.</returns>
-        public static ImageMeshAnimator FromType(PointTransformerType transformerType, InterpolatorType interpolatorType, string configs)
-        {
-            return ImageMeshAnimatorFactory.GetAnimator(transformerType, interpolatorType, configs);
-        }
-
-        /// <summary>
         /// Method animates an <see cref="ImageMesh"/>.
         /// </summary>
         /// <param name="value">The ImageMesh to be animated.</param>

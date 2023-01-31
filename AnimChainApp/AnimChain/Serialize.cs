@@ -1,4 +1,7 @@
 ﻿using AnimChainLib;
+using AnimChainLib.Transformers;
+using AnimChainLib.Interpolators;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -21,11 +24,12 @@ namespace AnimChain
         public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             JObject animation = JObject.Load(reader);
-            string transformerType = (string)animation["animation"];
-            string interpolatorType = (string)animation["timing"];
-            JObject configs = (JObject)animation["configs"];
+            string transformerType = (string)animation["animation"]["type"];
+            string interpolatorType = (string)animation["timing"]["type"];
+            string transformerConfigs = (string)animation["animation"]["configs"];
+            string interpolatorConfigs = (string)animation["timing"]["configs"];
 
-            return ImageMeshAnimatorFactory.GetAnimator(transformerType, interpolatorType, configs);
+            return ImageMeshAnimatorFactory.GetAnimator(transformerType, interpolatorType, transformerConfigs, interpolatorConfigs);
         }
 
         public override bool CanWrite { get { return false; } }
@@ -49,13 +53,10 @@ namespace AnimChain
         /// <param name="interpolatorType">The <see cref="Interpolator"/> implementation that will be used by the new ImageMeshAnimator.</param>
         /// <param name="configs">The JSON configs that will be used by the new ImageMeshAnimator.</param>
         /// <returns></returns>
-        public static ImageMeshAnimator GetAnimator(PointTransformerType transformerType, InterpolatorType interpolatorType, JObject configs)
+        public static ImageMeshAnimator GetAnimator(PointTransformerType transformerType, InterpolatorType interpolatorType, string transformerConfigs, string interpolatorConfigs)
         {
             ITransformer<Point> transformer;
             Interpolator interpolator;
-
-            string transformerConfigs = (string)configs["animation"]["configs"];
-            string interpolatorConfigs = (string)configs["timing"]["configs"];
 
             transformer = PointTransformerFactory.GetTransformer(transformerType, transformerConfigs);
             interpolator = InterpolatorFactory.GetInterpolator(interpolatorType, interpolatorConfigs);
@@ -64,7 +65,7 @@ namespace AnimChain
         }
 
         /// <inheritdoc cref="GetAnimator(PointTransformerType, InterpolatorType, JObject)"/>
-        public static ImageMeshAnimator GetAnimator(string transformerType, string interpolatorType, JObject configs)
+        public static ImageMeshAnimator GetAnimator(string transformerType, string interpolatorType, string transformerConfigs, string interpolatorConfigs)
         {
             PointTransformerType _transformerType;
             InterpolatorType _interpolatorType;
@@ -72,7 +73,7 @@ namespace AnimChain
             PointTransformerType.TryParse(transformerType, out _transformerType);
             InterpolatorType.TryParse(interpolatorType, out _interpolatorType);
 
-            return GetAnimator(_transformerType, _interpolatorType, configs);
+            return GetAnimator(_transformerType, _interpolatorType, transformerConfigs, interpolatorConfigs);
         }
     }
 
@@ -93,8 +94,8 @@ namespace AnimChain
 
             switch (type)
             {
-                case PointTransformerType./*TODO*/:
-                    transformer = JsonConvert.DeserializeObject</*TODO*/>(configs);
+                case PointTransformerType.FlyIn:
+                    transformer = JsonConvert.DeserializeObject<FlyIn>(configs);
                     break;
                     // etc
             }
@@ -120,8 +121,8 @@ namespace AnimChain
 
             switch (type)
             {
-                case Interpolator./*TODO*/:
-                    interpolator = JsonConvert.DeserializeObject</*TODO*/>(configs);
+                case InterpolatorType.Constant:
+                    interpolator = JsonConvert.DeserializeObject<Constant>(configs);
                     break;
                     // etc
             }
@@ -147,6 +148,6 @@ namespace AnimChain
     /// </summary>
     public enum InterpolatorType
     {
-
+        Constant
     }
 }

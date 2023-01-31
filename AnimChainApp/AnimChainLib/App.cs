@@ -22,6 +22,8 @@
             this.chain = chain;
             this.configs = configs;
         }
+
+        public AnimationChainApp() { } // HEY THIS IS WEIRD
     }
 
     /// <summary>
@@ -48,6 +50,8 @@
         /// Instance variable represents the file format of the exported animation.
         /// </summary>
         public readonly FileFormat Format;
+
+        public AppConfigs() { } // HEY THIS IS WEIRD
 
         /// <summary>
         /// Constructor initializes a new instance of the <see cref="Configs"/> class from the specified resolution, delay, and format.
