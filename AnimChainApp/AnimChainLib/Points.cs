@@ -617,17 +617,8 @@ namespace AnimChainLib
         /// </summary>
         /// <param name="base64EncodedData">A base-64 string on image data.</param>
         /// <exception cref="MalformedImageException"><paramref name="base64EncodedData"/> is <see langword="null"/>.</exception>
-        public ImageMesh(string base64EncodedData) : this(base64ToImage(base64EncodedData)) { }
+        public ImageMesh(string base64EncodedData) : this(Util.Base64ToImage(base64EncodedData)) { }
 
-        private static SKBitmap base64ToImage(string base64EncodedData)
-        {
-            if (base64EncodedData == null) throw new MalformedImageException("Image is null");
-            MemoryStream imageStream = new MemoryStream(Encoding.UTF8.GetBytes(base64EncodedData));
-
-            SKBitmap image = SKBitmap.Decode(imageStream); // create image from data
-
-            return image;
-        }
 
         /// <summary>
         /// Constructor intializes a new instance of the <see cref="ImageMesh"/> class with the specified points and pixels.

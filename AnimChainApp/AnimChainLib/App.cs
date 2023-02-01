@@ -1,4 +1,6 @@
-﻿namespace AnimChainLib
+﻿using SkiaSharp;
+
+namespace AnimChainLib
 {
     public class AnimationChainApp
     {
@@ -10,7 +12,7 @@
         /// <summary>
         /// Instance variable represents the <see cref="AnimationChain"/> that will be used to render am animation.
         /// </summary>
-        private AnimationChain chain;
+        public AnimationChain Chain;
 
         /// <summary>
         /// Constructor initializes a new instance of the <see cref="AnimChainApp"/> class with the specified AnimationChan and configuration settings.
@@ -19,11 +21,15 @@
         /// <param name="configs">The configuration settings that will be used to export the animation.</param>
         public AnimationChainApp(AnimationChain chain, AppConfigs configs)
         {
-            this.chain = chain;
+            Chain = chain;
             this.configs = configs;
         }
 
-        public AnimationChainApp() { } // HEY THIS IS WEIRD
+        public AnimationChainApp(SKBitmap image)
+        {
+            Chain = new AnimationChain(image);
+            
+        }
     }
 
     /// <summary>

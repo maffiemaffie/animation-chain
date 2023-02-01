@@ -5,8 +5,41 @@ using AnimChainLib.Interpolators;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+using SkiaSharp;
+using System.Text;
+
 namespace AnimChain
 {
+    /// <summary>
+    /// Contains methods that use a JSON object to construct an AnimationChain.
+    /// </summary>
+    /// <seealso cref="AnimationChain"/>
+    public class AnimationChainConverter : JsonConverter
+    {
+        /// <inheritdoc cref="JsonConverter.CanConvert(Type)"/>
+        public override bool CanConvert(Type objectType)
+        {
+            return (objectType == typeof(AnimationChain));
+        }
+
+        /// <inheritdoc cref="JsonConverter.ReadJson(JsonReader, Type, object?, JsonSerializer)"/>
+        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
+        {
+            JObject chain = JObject.Load(reader);
+            List<AnimationQueue> queues = JsonConvert.DeserializeObject<List<AnimationQueue>>((string)chain["queues"]);
+            SKBitmap image = Util.Base64ToImage((string)chain["image"]);
+            return new AnimationChain(image, queues);
+        }
+
+        public override bool CanWrite { get { return false; } }
+
+        /// <inheritdoc cref="JsonConverter.WriteJson(JsonWriter, object?, JsonSerializer)"/>
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     /// <summary>
     /// Contains methods that take a JSON object and construct the appropriate animator.
     /// </summary>
@@ -25,8 +58,8 @@ namespace AnimChain
         {
             JObject animation = JObject.Load(reader);
             string transformerType = (string)animation["animation"]["type"];
-            string interpolatorType = (string)animation["timing"]["type"];
             string transformerConfigs = (string)animation["animation"]["configs"];
+            string interpolatorType = (string)animation["timing"]["type"];
             string interpolatorConfigs = (string)animation["timing"]["configs"];
 
             return ImageMeshAnimatorFactory.GetAnimator(transformerType, interpolatorType, transformerConfigs, interpolatorConfigs);

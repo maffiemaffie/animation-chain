@@ -42,6 +42,8 @@ namespace AnimChainLib
 			this.queues = queues;
 		}
 
+		public int Count { get { return queues.Count; } }
+
 		/// <summary>
 		/// Method adds a queue to the end of the chain. 
 		/// </summary>
